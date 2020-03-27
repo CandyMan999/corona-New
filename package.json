@@ -1,0 +1,52 @@
+{
+  "dependencies": {
+    "apollo-server": "^2.11.0",
+    "apollo-server-express": "^2.11.0",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "graphql": "^14.6.0",
+    "mongoose": "^5.9.5",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.0",
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
+  },
+  "name": "virusapi",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "engines": {
+    "node": "v10.16.3",
+    "yarn": "1.10.1",
+    "npm": "6.13.7"
+  },
+  "scripts": {
+    "start": "node -r esm server.js",
+    "client": "cd client && yarn start",
+    "build": "cd client && yarn build",
+    "install-client": "cd client && yarn install",
+    "heroku-postbuild": "yarn install-client && yarn build",
+    "start:client": "cd client && yarn start",
+    "dev:server": "NODE_ENV=development nodemon --exec babel-node server.js",
+    "dev": "concurrently \"yarn client\" \"yarn dev:server\""
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CandyMan999/corona-react.git"
+  },
+  "author": "John Lewis <jalewis1221@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/CandyMan999/corona-react/issues"
+  },
+  "homepage": "https://github.com/CandyMan999/corona-react#readme",
+  "description": ""
+}

@@ -22,30 +22,36 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 4444;
 
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  })
-  .then(() => console.log("DB Conected"))
-  .catch(err => console.error(err));
+const startServer = async () => {
+  await mongoose
+    .connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
+    .then(() => console.log("DB Conected"))
+    .catch(err => console.error(err));
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  introspection: true,
-  playground: true
-});
-server.applyMiddleware({ app });
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    introspection: true,
+    playground: true
   });
-}
+  server.applyMiddleware({ app });
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
-  console.log(`Playground available at localhost:${port}${server.graphqlPath}`);
-});
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+    app.get("*", (req, res) => {
+      res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    });
+  }
+
+  app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+    console.log(
+      `Playground available at localhost:${port}${server.graphqlPath}`
+    );
+  });
+};
+
+startServer();

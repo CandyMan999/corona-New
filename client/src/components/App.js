@@ -125,13 +125,13 @@ class App extends Component {
                   <h2>
                     <p style={{ color: "blue" }}>{this.state.selectedOption}</p>
                   </h2>
-                  <p>Confirmed With this shit!: {data.getState.confirmed}</p>
+                  <p>Confirmed with this Shit!: {data.getState.confirmed}</p>
                   <p>Last Updated: {time}</p>
                   <p>Recovered: {data.getState.recovered || 0}</p>
                   <p>Deaths: {data.getState.deaths}</p>
                   <p>Actively Infected: {data.getState.active}</p>
                   <p>
-                    DEATH TOLL %:{" "}
+                    DEATH Rate %:{" "}
                     <span style={{ color: "red" }}>{deathRate}</span>
                   </p>
                 </div>

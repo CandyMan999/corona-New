@@ -131,8 +131,8 @@ class App extends Component {
                   <p>Deaths: {data.getState.deaths}</p>
                   <p>Actively Infected: {data.getState.active}</p>
                   <p>
-                    DEATH Rate %:{" "}
-                    <span style={{ color: "red" }}>{deathRate}</span>
+                    DEATH Rate:{" "}
+                    <span style={{ color: "red" }}>{deathRate}%</span>
                   </p>
                 </div>
               );

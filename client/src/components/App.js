@@ -8,58 +8,58 @@ import Comment from "./Comment";
 import GetComments from "./GetComment";
 
 const stateList = [
-  { label: "AL", value: "Alabama" },
-  { label: "AK", value: "Alaska" },
-  { label: "AZ", value: "Arizona" },
-  { label: "AR", value: "Arkansas" },
-  { label: "CA", value: "California" },
-  { label: "CO", value: "Colorado" },
-  { label: "CT", value: "Conneticut" },
-  { label: "DE", value: "Deleware" },
-  { label: "FL", value: "Florida" },
-  { label: "GA", value: "Georgia" },
-  { label: "HI", value: "Hawaii" },
-  { label: "ID", value: "Idaho" },
-  { label: "IL", value: "Illinois" },
-  { label: "IN", value: "Indiana" },
-  { label: "IA", value: "Iowa" },
-  { label: "KS", value: "Kansas" },
-  { label: "KY", value: "Kentucky" },
-  { label: "LA", value: "Louisiana" },
-  { label: "ME", value: "Maine" },
-  { label: "MD", value: "Maryland" },
-  { label: "MA", value: "Massachusetts" },
-  { label: "MI", value: "Michigan" },
-  { label: "MN", value: "Minnesota" },
-  { label: "MS", value: "Mississippi" },
-  { label: "MO", value: "Missouri" },
-  { label: "MT", value: "Montana" },
-  { label: "NE", value: "Nebraska" },
-  { label: "NV", value: "Nevada" },
-  { label: "NH", value: "New Hampshire" },
-  { label: "NJ", value: "New Jersey" },
-  { label: "NM", value: "New Mexico" },
-  { label: "NY", value: "New York" },
-  { label: "NC", value: "North Carolina" },
-  { label: "ND", value: "North Dakota" },
-  { label: "OH", value: "Ohio" },
-  { label: "OK", value: "Oklahoma" },
-  { label: "OR", value: "Oregon" },
-  { label: "PA", value: "Pennsylvania" },
-  { label: "PR", value: "Puerto Rico" },
-  { label: "RI", value: "Rhode Island" },
-  { label: "SC", value: "South Carolina" },
-  { label: "SD", value: "South Dakota" },
-  { label: "TN", value: "Tennessee" },
-  { label: "TX", value: "Texas" },
-  { label: "UT", value: "Utah" },
-  { label: "VT", value: "Vermont" },
-  { label: "VI", value: "Virgin Islands" },
-  { label: "VA", value: "Virginia" },
-  { label: "WA", value: "Washington" },
-  { label: "WV", value: "West Virginia" },
-  { label: "WI", value: "Wisconsin" },
-  { label: "WY", value: "Wyoming" }
+  { value: "AL", label: "AL" },
+  { value: "AK", label: "Alaska" },
+  { value: "AZ", label: "Arizona" },
+  { value: "AR", label: "Arkansas" },
+  { value: "CA", label: "California" },
+  { value: "CO", label: "Colorado" },
+  { value: "CT", label: "Conneticut" },
+  { value: "DE", label: "Deleware" },
+  { value: "FL", label: "Florida" },
+  { value: "GA", label: "Georgia" },
+  { value: "HI", label: "Hawaii" },
+  { value: "ID", label: "Idaho" },
+  { value: "IL", label: "Illinois" },
+  { value: "IN", label: "Indiana" },
+  { value: "IA", label: "Iowa" },
+  { value: "KS", label: "Kansas" },
+  { value: "KY", label: "Kentucky" },
+  { value: "LA", label: "Louisiana" },
+  { value: "ME", label: "Maine" },
+  { value: "MD", label: "Maryland" },
+  { value: "MA", label: "Massachusetts" },
+  { value: "MI", label: "Michigan" },
+  { value: "MN", label: "Minnesota" },
+  { value: "MS", label: "Mississippi" },
+  { value: "MO", label: "Missouri" },
+  { value: "MT", label: "Montana" },
+  { value: "NE", label: "Nebraska" },
+  { value: "NV", label: "Nevada" },
+  { value: "NH", label: "New Hampshire" },
+  { value: "NJ", label: "New Jersey" },
+  { value: "NM", label: "New Mexico" },
+  { value: "NY", label: "New York" },
+  { value: "NC", label: "North Carolina" },
+  { value: "ND", label: "North Dakota" },
+  { value: "OH", label: "Ohio" },
+  { value: "OK", label: "Oklahoma" },
+  { value: "OR", label: "Oregon" },
+  { value: "PA", label: "Pennsylvania" },
+  { value: "PR", label: "Puerto Rico" },
+  { value: "RI", label: "Rhode Island" },
+  { value: "SC", label: "South Carolina" },
+  { value: "SD", label: "South Dakota" },
+  { value: "TN", label: "Tennessee" },
+  { value: "TX", label: "Texas" },
+  { value: "UT", label: "Utah" },
+  { value: "VT", label: "Vermont" },
+  { value: "VI", label: "Virgin Islands" },
+  { value: "VA", label: "Virginia" },
+  { value: "WA", label: "Washington" },
+  { value: "WV", label: "West Virginia" },
+  { value: "WI", label: "Wisconsin" },
+  { value: "WY", label: "Wyoming" }
 ];
 
 class App extends Component {
@@ -111,9 +111,8 @@ class App extends Component {
               if (loading) return <div>Loading...</div>;
               if (error) return <div>Error...</div>;
 
-              let time = moment
-                .unix(data.getState.lastUpdate / 1000)
-                .format("MM/DD/YYYY HH:mm:A");
+              const lapse = Date.now() - data.getState.lastUpdate;
+              const time = moment(lapse).format("LLLL");
 
               const deathRate = Math.round(
                 (Number(data.getState.deaths) /
@@ -124,13 +123,11 @@ class App extends Component {
               return (
                 <div>
                   <h2>
-                    <p style={{ color: "blue" }}>
-                      {data.getState.provinceState}
-                    </p>
+                    <p style={{ color: "blue" }}>{this.state.selectedOption}</p>
                   </h2>
                   <p>Confirmed With this shit!: {data.getState.confirmed}</p>
                   <p>Last Updated: {time}</p>
-                  <p>Recovered: {data.getState.recovered}</p>
+                  <p>Recovered: {data.getState.recovered || 0}</p>
                   <p>Deaths: {data.getState.deaths}</p>
                   <p>Actively Infected: {data.getState.active}</p>
                   <p>
@@ -145,8 +142,8 @@ class App extends Component {
 
           <h1
             style={{
-              fontFamily: "cursive",
-              color: "magenta",
+              fontFamily: "monospace",
+              color: "aquamarine",
               fontWeight: "bolder",
               marginTop: "20px"
             }}

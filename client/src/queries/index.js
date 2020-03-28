@@ -4,10 +4,8 @@ import { gql } from "apollo-boost";
 export const GET_STATE = gql`
   query($provinceState: String!) {
     getState(provinceState: $provinceState) {
-      provinceState
       confirmed
       lastUpdate
-      recovered
       deaths
       active
     }

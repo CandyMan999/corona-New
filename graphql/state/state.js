@@ -3,23 +3,28 @@ import axios from "axios";
 
 export const stateResolver = async (parent, args) => {
   const { provinceState } = args;
+
   const response = await axios({
-    url: "https://covid19.mathdro.id/api/confirmed",
+    url: `http://coronavirusapi.com/getTimeSeries/${provinceState}`,
     method: "GET"
   });
 
-  const stateData = response.data.filter(
-    state => state.provinceState === provinceState
-  );
+  let info = await response.data
+    .split(",")
+    .reverse()
+    .slice(0, 4);
+  console.log(info);
 
-  const { confirmed, recovered, deaths, active, lastUpdate } = stateData[0];
-
-  return { confirmed, provinceState, recovered, deaths, active, lastUpdate };
+  return {
+    confirmed: info[1],
+    deaths: info[0],
+    active: info[1],
+    lastUpdate: info[3].slice(4)
+  };
 };
 
 export const stateDefs = gql`
   type State {
-    provinceState: String!
     lastUpdate: String!
     confirmed: Int
     recovered: Int

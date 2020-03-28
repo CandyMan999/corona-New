@@ -18,11 +18,11 @@ class GetComments extends Component {
                   margin: "4px, 4px",
                   padding: "4px",
                   backgroundColor: "lightBlue",
-                  width: "50%",
+
                   height: "400px",
                   overflowY: "scroll",
                   textAlign: "justify",
-                  marginLeft: "25%",
+
                   marginTop: "20px"
                 }}
               >

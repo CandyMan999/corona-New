@@ -6,6 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import moment from "moment";
 import Comment from "./Comment";
 import GetComments from "./GetComment";
+import { NavLink, withRouter } from "react-router-dom";
 
 const stateList = [
   { value: "AL", label: "AL" },
@@ -81,11 +82,17 @@ class App extends Component {
         className="App"
         style={{ display: "flex", height: "100%", width: "100%" }}
       >
+        <NavLink to="/US">
+          <button style={{ position: "absolute", backgroundColor: "gold" }}>
+            Check Entire US
+          </button>
+        </NavLink>
         <div
           style={{
             justifyContent: "space-around",
             height: "100%",
-            width: "100%"
+            width: "100%",
+            marginTop: "20px"
           }}
         >
           <h1>Who is Dying From CoronaVirus</h1>
@@ -157,4 +164,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

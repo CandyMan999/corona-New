@@ -12,6 +12,18 @@ export const GET_STATE = gql`
   }
 `;
 
+export const GET_COUNTRY = gql`
+  query {
+    getCountry {
+      confirmed
+      recovered
+      deaths
+      lastUpdate
+      active
+    }
+  }
+`;
+
 export const ADD_COMMENT = gql`
   mutation($name: String!, $picture: String, $comment: String!) {
     addComment(name: $name, picture: $picture, comment: $comment) {

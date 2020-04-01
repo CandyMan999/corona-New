@@ -29,11 +29,13 @@ class GetComments extends Component {
                 {data.getAllComments.reverse().map((comment, i) => (
                   <div key={`comment-${i}`}>
                     <p>
-                      <img
-                        style={{ height: "30px", marginRight: "5px" }}
-                        src={comment.picture}
-                        alt={`pic-${i}`}
-                      />
+                      {!!comment.picture && (
+                        <img
+                          style={{ height: "30px", marginRight: "5px" }}
+                          src={comment.picture}
+                          alt={`pic-${i}`}
+                        />
+                      )}
                       <span
                         style={{
                           fontFamily: "cursive",

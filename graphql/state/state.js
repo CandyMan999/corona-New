@@ -18,7 +18,7 @@ export const stateResolver = async (parent, args) => {
   return {
     confirmed: info[1],
     deaths: info[0],
-    active: info[1],
+    active: info[1] - info[0],
     lastUpdate: info[3].slice(4)
   };
 };

@@ -4,6 +4,7 @@ export default gql`
   type Query {
     getState(provinceState: String!): State!
     getAllComments: [Comment]
+    getCountry: Country!
   }
 
   type Mutation {

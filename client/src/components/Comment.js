@@ -37,28 +37,34 @@ class Comment extends Component {
       <div style={{ marginTop: "15px" }}>
         <Mutation mutation={ADD_COMMENT} variables={{ comment, name, picture }}>
           {(addComment, { data, loading, error }) => {
+            if (loading) return <div>Loading...</div>;
+            if (error) return <div>Error... </div>;
             return (
-              !!this.state.name && (
-                <form
-                  className="form"
-                  onSubmit={e => this.handleSubmit(e, addComment)}
-                >
-                  <input
-                    type="text"
-                    name="comment"
-                    placeholder="Write a comment"
-                    value={comment}
-                    onChange={this.handleChange}
-                  />
-                  <button type="submit" className="button-primary">
-                    Submit
-                  </button>
-                </form>
-              )
+              <form
+                className="form"
+                onSubmit={e => this.handleSubmit(e, addComment)}
+              >
+                <input
+                  type="text"
+                  name="comment"
+                  placeholder="Write a comment"
+                  value={comment}
+                  onChange={this.handleChange}
+                />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  value={name}
+                  onChange={this.handleChange}
+                />
+                <button type="submit" className="button-primary">
+                  Submit
+                </button>
+              </form>
             );
           }}
         </Mutation>
-        {!this.state.name && <FacebookButton onClick={this.handleFacebook} />}
       </div>
     );
   }

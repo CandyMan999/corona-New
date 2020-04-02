@@ -21,6 +21,7 @@ class Comment extends Component {
   };
 
   handleSubmit = (e, addComment) => {
+    e.preventDefault();
     addComment()
       .catch(err => console.log(err))
       .then(data => console.log(data));

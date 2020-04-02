@@ -5,6 +5,7 @@ import { GET_COUNTRY } from "../queries";
 import Comment from "../components/Comment";
 import GetComments from "../components/GetComment";
 import { withRouter, NavLink } from "react-router-dom";
+import { RingLoader } from "react-spinners";
 
 class UnitedStates extends Component {
   render() {
@@ -31,12 +32,14 @@ class UnitedStates extends Component {
                 return (
                   <div
                     style={{
-                      justifyContent: "space-around",
+                      display: "flex",
+                      marginTop: "10px",
+                      justifyContent: "center",
                       height: "100%",
                       width: "100%"
                     }}
                   >
-                    Loading...
+                    <RingLoader sizeUnit="px" size={100} color="lightBlue" />
                   </div>
                 );
               if (error)
@@ -65,7 +68,9 @@ class UnitedStates extends Component {
                     width: "100%"
                   }}
                 >
-                  <h1 style={{ color: "blue" }}>United States</h1>
+                  <h1 style={{ color: "blue", marginTop: "20px" }}>
+                    United States
+                  </h1>
 
                   <p>Confirmed with this Shit!: {data.getCountry.confirmed}</p>
                   <p>Last Updated: {data.getCountry.lastUpdate}</p>
@@ -80,7 +85,6 @@ class UnitedStates extends Component {
               );
             }}
           </Query>
-          <Comment />
 
           <h1
             style={{
@@ -93,6 +97,7 @@ class UnitedStates extends Component {
             WTF People Are Saying
           </h1>
           <GetComments />
+          <Comment />
         </div>
       </div>
     );

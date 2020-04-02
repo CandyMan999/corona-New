@@ -50,6 +50,7 @@ class Comment extends Component {
                   placeholder="Write a comment"
                   value={comment}
                   onChange={this.handleChange}
+                  style={{ width: "100%" }}
                 />
                 <input
                   type="text"
@@ -57,8 +58,13 @@ class Comment extends Component {
                   placeholder="Name"
                   value={name}
                   onChange={this.handleChange}
+                  style={{ display: "flex" }}
                 />
-                <button type="submit" className="button-primary">
+                <button
+                  type="submit"
+                  className="button-primary"
+                  style={{ color: "red" }}
+                >
                   Submit
                 </button>
               </form>

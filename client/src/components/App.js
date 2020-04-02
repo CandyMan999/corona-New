@@ -7,6 +7,7 @@ import moment from "moment";
 import Comment from "./Comment";
 import GetComments from "./GetComment";
 import { NavLink, withRouter } from "react-router-dom";
+import { RingLoader } from "react-spinners";
 
 const stateList = [
   { value: "AL", label: "AL" },
@@ -115,7 +116,20 @@ class App extends Component {
             variables={{ provinceState: selectedOption }}
           >
             {({ data, loading, error }) => {
-              if (loading) return <div>Loading...</div>;
+              if (loading)
+                return (
+                  <div
+                    style={{
+                      display: "flex",
+                      marginTop: "10px",
+                      justifyContent: "center",
+                      height: "100%",
+                      width: "100%"
+                    }}
+                  >
+                    <RingLoader sizeUnit="px" size={100} color="lightBlue" />
+                  </div>
+                );
               if (error) return <div>Error...</div>;
 
               const lapse = Date.now() - data.getState.lastUpdate;
@@ -145,7 +159,6 @@ class App extends Component {
               );
             }}
           </Query>
-          <Comment />
 
           <h1
             style={{
@@ -158,6 +171,7 @@ class App extends Component {
             WTF People Are Saying
           </h1>
           <GetComments />
+          <Comment />
         </div>
       </div>
     );
